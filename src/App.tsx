@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import "./App.css";
+import TopNav from './navbar/TopNav';
+import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.css'
+import { display } from "@mui/system";
+import SearchIcon from '@mui/icons-material/Search';
+
 
 function App() {
+  
+  const [userId, setUserId] = useState("");
+
+  function t() {
+    axios.get("https://friends.roblox.com/v1/users/" + userId + "/friends", 
+    {headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+      'crossdomain' : true
+    },
+    
+  }).then((res) => {
+    
+      console.log(res.data);
+    });
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <TopNav/>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '92vh',
+        backgroundColor: 'pink'
+      }}>
+        <form>
+          <input type='text' 
+          placeholder='name' 
+          id ='searchInput'
+          onChange={(e) => setUserId(e.target.value)}
+          />
+          <SearchIcon cursor='pointer' onClick={t} />
+        </form>
+      </div>
+    </>
   );
 }
-
 export default App;
