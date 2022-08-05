@@ -3,21 +3,32 @@ import "./App.css";
 import TopNav from './navbar/TopNav';
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.css'
-import { display } from "@mui/system";
-import SearchIcon from '@mui/icons-material/Search';
-import zIndex from "@mui/material/styles/zIndex";
-import { Hidden } from "@mui/material";
-
 
 function App() {
   
-  const [userId, setUserId] = useState("");
+  const [name, setName] = useState("");
+  const [activeTime, setActiveTime] = useState("");
+  const [diet, setDiet] = useState("");
+  const [geoRange, setGeoRange] = useState("");
+  const [habitat, setHabitat] = useState("");
+  const [maxLength, setMaxlength] = useState("");
+  const [maxWeight, setMaxWeight] = useState("");
+  const [image, setImage] = useState("");
+
 
   function t() {
     axios.get("https://zoo-animal-api.herokuapp.com/animals/rand")
   .then((res) => {
-      console.log(res.data);
-      return <div>asd</div>
+      // console.log(res.data);
+      setName("Name: " + res.data.name);
+      setActiveTime("Active time: " + res.data.active_time);
+      setDiet("Diet: " + res.data.diet);
+      setGeoRange("Geo-range: " + res.data.geo_range);
+      setHabitat("Habitat: " + res.data.habitat);
+      setMaxlength("Max-length: " + res.data.length_max);
+      setMaxWeight("Max-weight: " + res.data.weight_max);
+      setImage(res.data.image_link);
+      document.getElementById('pop')?.style.setProperty("display", "flex"); 
     });
   }
   return (
@@ -34,15 +45,27 @@ function App() {
         <button onClick={() =>t()}>
           Get the Random Animal!
         </button>
-        <div className="popup" 
+        <div className="popup" id='pop'
           style={{
+
             display: 'none', 
             position:'absolute' , 
             width: '100vw', 
             height: '92.5vh', 
             backgroundColor: 'skyblue', 
-            zIndex:1}}>
-            asdf
+            zIndex:1,
+            alignItems: 'center',
+            // justifyContent: 'center',
+            flexDirection: 'column'
+            }}>
+            <img src={image} style={{width: '50vw', height: '50vh'}}/>
+            {name}<br/>
+            {activeTime}<br/>
+            {diet}<br/>
+            {geoRange}<br/>
+            {habitat}<br/>
+            {maxLength}<br/>
+            {maxWeight}
         </div>
       </div>
             
