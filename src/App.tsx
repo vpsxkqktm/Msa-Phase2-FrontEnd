@@ -81,7 +81,7 @@ function App() {
             Geo_range: {res.data[i].geo_range}<br/>
             Habitat: {res.data[i].habitat}<br/>
             Max length: {res.data[i].length_max}<br/>
-            Max weight: {res.data[i].weight_max};
+            Max weight: {res.data[i].weight_max}
             </>
           ]);
         // <img src={res.data[i].image_link} style={{width: '50vw', height: '50vh'}}/>
