@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import CloseIcon from '@mui/icons-material/Close';
+import {isMobile} from 'react-device-detect';
 
 function App() {
   // const [name, setName] = useState("");
@@ -71,19 +72,35 @@ function App() {
   .then((res) => {
       // let animalArray = [];
       for (let i = 0; i < parseInt(inVal); i++){
-        setFi(fi => 
-          [...fi, 
-            <>
-            <img src={res.data[i].image_link} style={{width: '50vw', height: '50vh'}}/><br/>
-            Name: {res.data[i].name}<br/>
-            Active time: {res.data[i].active_time}<br/>
-            Diet: {res.data[i].diet}<br/>
-            Geo_range: {res.data[i].geo_range}<br/>
-            Habitat: {res.data[i].habitat}<br/>
-            Max length: {res.data[i].length_max}<br/>
-            Max weight: {res.data[i].weight_max}
-            </>
-          ]);
+        if (isMobile){
+          setFi(fi => 
+            [...fi, 
+              <>
+              <img src={res.data[i].image_link} style={{width: '100vw', height: '50vh'}}/><br/>
+              Name: {res.data[i].name}<br/>
+              Active time: {res.data[i].active_time}<br/>
+              Diet: {res.data[i].diet}<br/>
+              Geo_range: {res.data[i].geo_range}<br/>
+              Habitat: {res.data[i].habitat}<br/>
+              Max length: {res.data[i].length_max}<br/>
+              Max weight: {res.data[i].weight_max}
+              </>
+            ]);
+        }else{
+          setFi(fi => 
+            [...fi, 
+              <>
+              <img src={res.data[i].image_link} style={{width: '50vw', height: '50vh'}}/><br/>
+              Name: {res.data[i].name}<br/>
+              Active time: {res.data[i].active_time}<br/>
+              Diet: {res.data[i].diet}<br/>
+              Geo_range: {res.data[i].geo_range}<br/>
+              Habitat: {res.data[i].habitat}<br/>
+              Max length: {res.data[i].length_max}<br/>
+              Max weight: {res.data[i].weight_max}
+              </>
+            ]);
+        }
         // <img src={res.data[i].image_link} style={{width: '50vw', height: '50vh'}}/>
         // {info.name}<br/>
         // {info.active_time}<br/>
@@ -148,7 +165,7 @@ function App() {
             height: '92.5vh',  
             zIndex:1,
             alignItems: 'center',
-            // justifyContent: 'center',
+            //justifyContent: 'center',
             flexDirection: 'column'
             }}>
             <div>
@@ -164,7 +181,9 @@ function App() {
             {maxWeight}; */}
             
             {/* {animals()} */}
+            <div>
             {fi.map((data) => <div key={data.props.children[3]}>{data}</div> )}
+            </div>
         
         
       </div>
