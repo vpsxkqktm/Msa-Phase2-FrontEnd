@@ -7,56 +7,26 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import CloseIcon from '@mui/icons-material/Close';
 import {isMobile} from 'react-device-detect';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+import { Autoplay, Navigation, Pagination } from "swiper";
+import {Button} from './stories/Button';
+import Game from './components/RpsGame';
 
 function App() {
-  // const [name, setName] = useState("");
-  // const [activeTime, setActiveTime] = useState("");
-  // const [diet, setDiet] = useState("");
-  // const [geoRange, setGeoRange] = useState("");
-  // const [habitat, setHabitat] = useState("");
-  // const [maxLength, setMaxlength] = useState("");
-  // const [maxWeight, setMaxWeight] = useState("");
-  // const [image, setImage] = useState("");
+  const goToGame = () => {
+    document.getElementById("first")?.style.setProperty("display", "none");
+    document.getElementById("second")?.style.setProperty("display", "flex");
+  };
   const [inVal, setInVal] = useState("");
   const [fi,setFi] = useState<any[]>([]);
   const ref= useRef<any>(null);
-  // active_time: "Nocturnal"
-  // animal_type: "Bird"
-  // diet: "Fish and marine invertebrates"
-  // geo_range: "Australia and New Zealand"
-  // habitat: "Ocean and coastal shores"
-  // id: 106
-  // image_link: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Little_Penguin_Feb09.jpg"
-  // latin_name: "Eudyptula minor"
-  // length_max: "1.5"
-  // length_min: "1.3"
-  // lifespan: "25"
-  // name: "Little Blue Penguin"
-  // weight_max: "3.3"
-  // weight_min: "3"
-  // const [animalArray, setAinmalArray] = useState([]);
-
-  // const  animals = (x :any[]=[]) => {
-  //   // console.log(x);
-  //   const y = x.map((info) => (
-  //     <>
-  //     <img src={info.image_link} style={{width: '50vw', height: '50vh'}}/>
-  //     {info.name}<br/>
-  //     {info.active_time}<br/>
-  //     {info.diet}<br/>
-  //     {info.geo_range}<br/>
-  //     {info.habitat}<br/>
-  //     {info.length_max}<br/>
-  //     {info.weight_max};
-  //     </>
-  //   ));
-  //   console.log(y);
-  //   return (y);
-  // };
   const l = () =>{
     document.getElementById('first')?.style.setProperty("display", "flex");
     document.getElementById('pop')?.style.setProperty("display", "none"); 
-    // if (ref.current !== null)
     ref.current.value = null;
     setFi([]);
   };
@@ -70,7 +40,6 @@ function App() {
     document.getElementById('first')?.style.setProperty("display", "none");
     axios.get("https://zoo-animal-api.herokuapp.com/animals/rand/" + inVal)
   .then((res) => {
-      // let animalArray = [];
       for (let i = 0; i < parseInt(inVal); i++){
         if (isMobile){
           setFi(fi => 
@@ -101,38 +70,8 @@ function App() {
               </>
             ]);
         }
-        // <img src={res.data[i].image_link} style={{width: '50vw', height: '50vh'}}/>
-        // {info.name}<br/>
-        // {info.active_time}<br/>
-        // {info.diet}<br/>
-        // {info.geo_range}<br/>
-        // {info.habitat}<br/>
-        // {info.length_max}<br/>
-        // {info.weight_max};
-      
-        // {
-        // src : res.data[i].image_link,
-        // name: res.data[i].name,
-        // active_time: res.data[i].active_time,
-        // diet: res.data[i].diet,
-        // geo_range: res.data[i].geo_range,
-        // habitat: res.data[i].habitat,
-        // length_max: res.data[i].length_max,
-        // weight_max: res.data[i].weight_max,
-        // }])
       }
-      // console.log(res.data);
-      // console.log(animalArray);
-      // setName("Name: " + res.data.name);
-      // setActiveTime("Active time: " + res.data.active_time);
-      // setDiet("Diet: " + res.data.diet);
-      // setGeoRange("Geo-range: " + res.data.geo_range);
-      // setHabitat("Habitat: " + res.data.habitat);
-      // setMaxlength("Max-length: " + res.data.length_max);
-      // setMaxWeight("Max-weight: " + res.data.weight_max);
-      // setImage(res.data.image_link);
       document.getElementById('pop')?.style.setProperty("display", "flex"); 
-      // animals(animalArray);
     });
   }
   return (
@@ -148,7 +87,7 @@ function App() {
         zIndex: 0,
         flexDirection: 'column'
       }}>
-      
+        <Button primary={true} size={'large'} backgroundColor={'orange'} label={'want to play game?'} onClick={goToGame}/>
         Get the Random Animal!
         <br/>
         <div style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -158,7 +97,6 @@ function App() {
       </div>
         <div className="popup" id='pop'
           style={{
-          
             display: 'none', 
             position:'absolute' , 
             width: '100vw', 
@@ -171,24 +109,40 @@ function App() {
             <div>
             wanna play more? <CloseIcon cursor={'pointer'} onClick={()=>l()} />
             </div>
-            {/* <img src={image} style={{width: '50vw', height: '50vh'}}/>
-            {name}<br/>
-            {activeTime}<br/>
-            {diet}<br/>
-            {geoRange}<br/>
-            {habitat}<br/>
-            {maxLength}<br/>
-            {maxWeight}; */}
-            
-            {/* {animals()} */}
-            <div>
-            {fi.map((data) => <div key={data.props.children[3]}>{data}</div> )}
+            <div style={{display: 'flex', width: '100vw', height: '85vh'}}>
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              autoplay={{
+              delay: 2500,
+              //pauseOnMouseEnter: true,
+              disableOnInteraction: false
+              }}
+              navigation
+              pagination={{ clickable: true }}
+              //scrollbar={{ draggable: true }}
+              className='swiper-container'
+             >
+                {fi.map((data, index) => <SwiperSlide key={data.props.children[3]} virtualIndex={index} style={{display: 'flex', justifyContent: 'center'}} ><div>{data}</div></SwiperSlide> )}
+            </Swiper>
             </div>
         
         
       </div>
-            
+      <div id ="second" style={{
+        display: 'none',
+        alignItems: 'center',
+        height: '92.5vh',
+        backgroundColor: 'skyblue',
+        zIndex: 0,
+        flexDirection: 'column'}}>
+          <text style={{fontSize: "200%"}}>
+        Beat the Computer!
+        </text>
+        <Game/>
+      </div>
     </>
   );
 }
 export default App;
+//style={{display: 'flex', width: '100vw', height: '85vh'}}
+// style={{display:'flex', justifyContent: 'center'}}
