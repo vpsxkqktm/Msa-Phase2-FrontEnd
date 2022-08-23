@@ -4,10 +4,11 @@ import PaperImg from '../img/p.png';
 import SciImg from '../img/s.png';
 import { Image } from './Image'
 import { Button } from '../stories/Button'
-
+import {goBack} from '../App'
 
 let img:any;
 let pcPosition:any;
+
 
 const RpsGame = () => {
     const [val,setVal] = useState("");
@@ -15,6 +16,21 @@ const RpsGame = () => {
     const [score,setScore] = useState(0);
     const [pcScore,setPcScore] = useState(0);
     let pos = ["r", "p", "s"];
+
+    const Reset = () => {
+        setVal("");
+        setPcVal("");
+        setScore(0);
+        setPcScore(0);
+        img = "";
+        pcPosition = "";
+    };
+
+    const goBackPrep = () => {
+        Reset();
+        goBack();
+    }
+
     const check = (x:any) => {
         setVal(x);
         let y = pos[Math.floor(Math.random()*pos.length)];
@@ -50,6 +66,12 @@ const RpsGame = () => {
     callPc();
     return(
         <>
+        <text style={{fontSize: "200%"}}>
+        Beat the Computer!
+        </text>
+        <div><Button primary={true} size={'small'} backgroundColor={'orange'} label={'Go back'} onClick={goBackPrep}/>
+        <Button primary={true} size={'small'} backgroundColor={'orange'} label={'Reset'} onClick={Reset}/></div>
+        
             <div style={{display: 'flex', flex: 0.5, width: '100vw', flexDirection:"row"}}>
                 <div style={{display: 'flex', flex: 0.5, alignItems: 'center', justifyContent: 'end', flexDirection:"column"}}>
                 

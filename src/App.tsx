@@ -16,11 +16,16 @@ import { Autoplay, Navigation, Pagination } from "swiper";
 import {Button} from './stories/Button';
 import Game from './components/RpsGame';
 
+export const goBack = () => {
+  document.getElementById("first")?.style.setProperty("display", "flex");
+  document.getElementById("second")?.style.setProperty("display", "none");
+}
+const goToGame = () => {
+  document.getElementById("first")?.style.setProperty("display", "none");
+  document.getElementById("second")?.style.setProperty("display", "flex");
+};
 function App() {
-  const goToGame = () => {
-    document.getElementById("first")?.style.setProperty("display", "none");
-    document.getElementById("second")?.style.setProperty("display", "flex");
-  };
+  
   const [inVal, setInVal] = useState("");
   const [fi,setFi] = useState<any[]>([]);
   const ref= useRef<any>(null);
@@ -135,9 +140,7 @@ function App() {
         backgroundColor: 'skyblue',
         zIndex: 0,
         flexDirection: 'column'}}>
-          <text style={{fontSize: "200%"}}>
-        Beat the Computer!
-        </text>
+        
         <Game/>
       </div>
     </>
