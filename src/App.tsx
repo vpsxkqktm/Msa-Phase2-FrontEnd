@@ -1,4 +1,5 @@
 import axios from "axios";
+import { io }  from "socket.io-client";
 import "./App.css";
 import TopNav from './navbar/TopNav';
 import React, { useState, useRef } from "react";
@@ -16,6 +17,7 @@ import { Autoplay, Navigation, Pagination } from "swiper";
 import {Button} from './stories/Button';
 import Game from './components/RpsGame';
 
+
 export const goBack = () => {
   document.getElementById("first")?.style.setProperty("display", "flex");
   document.getElementById("second")?.style.setProperty("display", "none");
@@ -24,8 +26,11 @@ const goToGame = () => {
   document.getElementById("first")?.style.setProperty("display", "none");
   document.getElementById("second")?.style.setProperty("display", "flex");
 };
+
+const goToChat = () => {
+  window.location.replace('http://localhost:1234');
+};
 function App() {
-  
   const [inVal, setInVal] = useState("");
   const [fi,setFi] = useState<any[]>([]);
   const ref= useRef<any>(null);
@@ -79,6 +84,8 @@ function App() {
       document.getElementById('pop')?.style.setProperty("display", "flex"); 
     });
   }
+
+  
   return (
     <>
       <TopNav/>
@@ -92,7 +99,12 @@ function App() {
         zIndex: 0,
         flexDirection: 'column'
       }}>
-        <Button primary={true} size={'large'} backgroundColor={'orange'} label={'want to play game?'} onClick={goToGame}/>
+        {/* go to chat web */}
+        <Button primary={true} size={'large'} backgroundColor={'orange'} label={'want to chat?'} onClick={goToChat}/>
+        {/* button for game */}
+        <Button primary={true} size={'large'} backgroundColor={'orange'} label={'want to play a game?'} onClick={goToGame}/>
+        
+        {/* random animal generator */}
         Get the Random Animal!
         <br/>
         <div style={{alignItems: 'center', justifyContent: 'center'}}>
