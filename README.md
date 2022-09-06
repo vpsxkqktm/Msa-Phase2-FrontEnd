@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 [![Build Status](https://dev.azure.com/sd1593/Msa-phase3/_apis/build/status/vpsxkqktm.Msa-Phase2-FrontEnd%20(1)?branchName=master)](https://dev.azure.com/sd1593/Msa-phase3/_build/latest?definitionId=7&branchName=master)
 >>>>>>> 8ef94e86c1b575a9288247cabe654c223bf4d23f
 # Getting Started with Create React App
