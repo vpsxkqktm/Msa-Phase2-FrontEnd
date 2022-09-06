@@ -1,4 +1,3 @@
-[![Build Status](https://dev.azure.com/sd1593/Msa-phase3/_apis/build/status/vpsxkqktm.Msa-Phase2-FrontEnd%20(1)?branchName=master)](https://dev.azure.com/sd1593/Msa-phase3/_build/latest?definitionId=7&branchName=master)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
