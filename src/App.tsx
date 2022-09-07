@@ -27,6 +27,17 @@ const goToGame = () => {
   document.getElementById("second")?.style.setProperty("display", "flex");
 };
 
+export async function getStaticPaths(){
+  
+}
+
+export async function getStaticProps(){
+  
+}
+export async function getServerSideProps(){
+  
+}
+
 const goToChat = () => {
   window.location.replace('http://localhost:1234');
 };
