@@ -15,7 +15,7 @@ steps:
     versionSpec: '16.x'
   displayName: 'Install Node.js'
 
-  task: PublishBuildArtifacts@1
+- task: PublishBuildArtifacts@1
   
 - script: |
     npm install
